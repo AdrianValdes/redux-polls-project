@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPercentage } from '../utils/helpers';
+import { handleAddAnswer } from '../actions/answers';
 
 const getVotesKeys = () => ['aVotes', 'bVotes', 'cVotes', 'dVotes'];
 
 class Poll extends Component {
   handleAnswer = (answer) => {
-    //const { poll, authedUser } = this.props;
+    const { poll, authedUser } = this.props;
 
-    this.answer = true;
-    console.log(answer);
+    this.answered = true;
+    this.props.dispatch(
+      handleAddAnswer({
+        authedUser,
+        answer,
+        id: poll.id,
+      })
+    );
   };
 
   render() {
@@ -27,7 +34,7 @@ class Poll extends Component {
       <div className="poll-container">
         <h1 className="question">{poll.question}</h1>
         <div className="poll-author">
-          By <img src={authorAvatar} alt="Author's avater" />
+          By <img src={authorAvatar} alt="Author's avatar" />
         </div>
         <ul>
           {['aText', 'bText', 'cText', 'dText'].map((key) => {

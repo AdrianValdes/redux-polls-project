@@ -4,7 +4,7 @@ import { receivePolls } from './polls';
 import { setAuthedUser } from './authedUser';
 import { showLoading, hideLoading } from 'react-redux-loading';
 
-const AUTHED_ID = 'sarah_edo';
+const AUTHED_ID = 'tylermcginnis';
 // This is going to make an ajax request,
 // so it is going to be a thunk.
 export function handleInitialData() {
