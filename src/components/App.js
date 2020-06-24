@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading';
 
 import Poll from './Poll';
+import Nav from './Nav';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Leaderboard from './Leaderboard';
+import Dashboard from './Dashboard';
+import AddPoll from './AddPoll';
 
 class App extends React.Component {
   componentDidMount() {
@@ -13,12 +18,22 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <LoadingBar />
-        {this.props.loading === true ? null : (
-          <Poll match={{ params: { id: 'loxhs1bqm25b708cmbf3g' } }} />
-        )}
-      </div>
+      <BrowserRouter>
+        <React.Fragment>
+          <LoadingBar />
+          <div className="container">
+            <Nav />
+            {this.props.loading === true ? null : (
+              <div>
+                <Route exact path="/" component={Dashboard} />
+                <Route path="/leaderboard" component={Leaderboard} />
+                <Route path="/polls/:id" component={Poll} />
+                <Route path="/add" component={AddPoll} />
+              </div>
+            )}
+          </div>
+        </React.Fragment>
+      </BrowserRouter>
     );
   }
 }
