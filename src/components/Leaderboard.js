@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 function Leaderboard({ users }) {
   return (
     <ul>
-      {users.map((user) => (
+      {users.map(( {avatarURL, name, polls, answers } ) => (
         <li className="user" key={user.id}>
           <img src={user.avatarURL} alt={`Avatar for ${user.name}`} />
 
