@@ -40,7 +40,7 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    loading: state.authedUser === null,
+    loading: state.authenticatedUser === null,
   };
 }
 

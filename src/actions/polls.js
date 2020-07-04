@@ -21,12 +21,12 @@ function addPoll(poll) {
 //Using thunk to handle asynchronous functions
 export function handleAddPoll(poll) {
   return (dispatch, getState) => {
-    const { authedUser } = getState();
+    const { authenticatedUser } = getState();
     dispatch(showLoading());
     //Calling the API using its savePoll function
     return savePoll({
       ...poll,
-      author: authedUser,
+      author: authenticatedUser,
     })
       .then((poll) => dispatch(addPoll(poll)))
       .then(() => dispatch(hideLoading()));

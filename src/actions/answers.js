@@ -3,10 +3,10 @@ import { showLoading, hideLoading } from 'react-redux-loading';
 
 export const ADD_ANSWER = 'ADD_ANSWER';
 
-function addAnswer({ authedUser, id, answer }) {
+function addAnswer({ authenticatedUser, id, answer }) {
   return {
     type: ADD_ANSWER,
-    authedUser,
+    authenticatedUser,
     id,
     answer,
   };

@@ -17,10 +17,10 @@ export default function users(state = {}, action) {
         },
       };
     case ADD_ANSWER:
-      const user = state[action.authedUser];
+      const user = state[action.authenticatedUser];
       return {
         ...state,
-        [action.authedUser]: {
+        [action.authenticatedUser]: {
           ...user,
           answers: user.answers.concat([action.id]),
         },

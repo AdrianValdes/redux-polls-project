@@ -7,12 +7,12 @@ const getVotesKeys = () => ['aVotes', 'bVotes', 'cVotes', 'dVotes'];
 
 class Poll extends Component {
   handleAnswer = (answer) => {
-    const { poll, authedUser } = this.props;
+    const { poll, authenticatedUser } = this.props;
 
     this.answered = true;
     this.props.dispatch(
       handleAddAnswer({
-        authedUser,
+        authenticatedUser,
         answer,
         id: poll.id,
       })
@@ -69,7 +69,7 @@ class Poll extends Component {
   }
 }
 
-function mapStateToProps({ authedUser, polls, users }, { match }) {
+function mapStateToProps({ authenticatedUser, polls, users }, { match }) {
   const { id } = match.params;
   const poll = polls[id];
 
@@ -84,13 +84,13 @@ function mapStateToProps({ authedUser, polls, users }, { match }) {
       return vote[0];
     }
 
-    return poll[key].includes(authedUser) ? key : vote;
+    return poll[key].includes(authenticatedUser) ? key : vote;
   }, null);
 
   return {
     poll,
     vote,
-    authedUser,
+    authenticatedUser,
     authorAvatar: users[poll.author].avatarURL,
   };
 }

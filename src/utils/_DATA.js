@@ -224,15 +224,15 @@ export function _savePoll (poll) {
   })
 }
 
-export function _savePollAnswer ({ authedUser, id, answer }) {
+export function _savePollAnswer ({ authenticatedUser, id, answer }) {
   return new Promise((res, rej) => {
     setTimeout(() => {
-      const user = users[authedUser]
+      const user = users[authenticatedUser]
       const poll = polls[id]
 
       users = {
         ...users,
-        [authedUser]: {
+        [authenticatedUser]: {
           ...user,
           answers: {
             ...user.answers,
@@ -247,7 +247,7 @@ export function _savePollAnswer ({ authedUser, id, answer }) {
           ...poll,
           [answer]: {
             ...poll[answer],
-            votes: poll[answer].votes.concat([authedUser])
+            votes: poll[answer].votes.concat([authenticatedUser])
           }
         }
       }
