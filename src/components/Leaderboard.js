@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 function Leaderboard({ users }) {
   return (
     <ul>
-      {users.map(( {avatarURL, name, polls, answers } ) => (
-        <li className="user" key={user.id}>
-          <img src={user.avatarURL} alt={`Avatar for ${user.name}`} />
+      {users.map(({ avatarURL, name, polls, answers, id }) => (
+        <li className="user" key={id}>
+          <img src={avatarURL} alt={`Avatar for ${name}`} />
 
           <div>
-            <h1>{user.name}</h1>
-            <p>{user.polls} Polls</p>
-            <p>{user.answers} Answers</p>
+            <h1>{name}</h1>
+            <p>{polls} Polls</p>
+            <p>{answers} Answers</p>
           </div>
         </li>
       ))}
