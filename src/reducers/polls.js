@@ -10,7 +10,7 @@ export default function polls(state = {}, action) {
     case ADD_ANSWER:
       const { answer, id, authenticatedUser } = action;
       const poll = state[id];
-      const votesKey = answer + 'Votes';
+      const votesKey = `${answer}Votes`;
       return {
         ...state,
         [action.id]: {
