@@ -7,8 +7,7 @@ export default function users(state = {}, action) {
     case RECEIVE_USERS:
       return { ...state, ...action.users };
     case ADD_POLL:
-      const poll = action.poll;
-      const { author, id } = poll;
+      const { poll: { author, id }  } = action;
       return {
         ...state,
         [author]: {
