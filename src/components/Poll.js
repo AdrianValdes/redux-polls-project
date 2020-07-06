@@ -1,30 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { getPercentage } from '../utils/helpers';
 import { handleAddAnswer } from '../actions/answers';
 
 const getVotesKeys = () => ['aVotes', 'bVotes', 'cVotes', 'dVotes'];
 
-class Poll extends Component {
-  handleAnswer = (answer) => {
-    const { poll, authenticatedUser } = this.props;
+function Poll({
+  poll,
+  vote,
+  authenticatedUser,
+  authorAvatar, handleAddAnswer
+}) {
 
-    this.answered = true;
-    this.props.dispatch(
+  let answered;
+  const handleAnswer = (answer) => {
+   
+
+     answered = true;
+   
       handleAddAnswer({
         authenticatedUser,
         answer,
         id: poll.id,
       })
-    );
+    
   };
 
-  render() {
-    if (this.props.poll === null) {
+  
+    if (poll === null) {
       return <p>This poll does not exist</p>;
     }
 
-    const { poll, vote, authorAvatar } = this.props;
+   
     const totalVotes = getVotesKeys().reduce(
       (total, key) => total + poll[key].length,
       0
@@ -44,8 +51,8 @@ class Poll extends Component {
               <li
                 key={key}
                 onClick={() => {
-                  if (vote === null && !this.answered) {
-                    this.handleAnswer(key[0]);
+                  if (vote === null && !answered) {
+                    handleAnswer(key[0]);
                   }
                 }}
                 className={`option ${vote === key[0] ? 'chosen' : ''}`}
@@ -66,7 +73,7 @@ class Poll extends Component {
         </ul>
       </div>
     );
-  }
+  
 }
 
 function mapStateToProps({ authenticatedUser, polls, users }, { match }) {
@@ -95,4 +102,8 @@ function mapStateToProps({ authenticatedUser, polls, users }, { match }) {
   };
 }
 
-export default connect(mapStateToProps)(Poll);
+const mapDispatchToProps = {
+  handleAddAnswer: handleAddAnswer
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Poll);
