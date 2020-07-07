@@ -13,12 +13,12 @@ class AddPoll extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.history.push('/');
-    this.props.dispatch(handleAddPoll(this.state));
+    const { history, dispatch } = this.props;
+    history.push('/');
+    dispatch(handleAddPoll(this.state));
   };
 
-  handleInputChange = ({ target }) => {
-    const { value, name } = target;
+  handleInputChange = ({ target: { value, name } }) => {
     this.setState(() => ({
       [name]: value,
     }));
